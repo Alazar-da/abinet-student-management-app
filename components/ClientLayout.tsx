@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Header from './Header';
 
 export default function ClientLayout({
@@ -7,10 +8,15 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  
+  // Check if current page is login or register
+  const isAuthPage = pathname === '/login' || pathname === '/register';
+  
   return (
     <>
-      <Header />
-      <main className="min-h-screen bg-gray-50 pt-16">
+      {!isAuthPage && <Header />}
+      <main className={`min-h-screen bg-primary/15 ${!isAuthPage ? 'pt-16' : ''}`}>
         {children}
       </main>
     </>
