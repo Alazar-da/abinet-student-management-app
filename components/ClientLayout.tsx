@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import { usePathname } from 'next/navigation';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function ClientLayout({
   children,
@@ -44,9 +45,7 @@ export default function ClientLayout({
   
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-primary text-xl">Loading...</div>
-      </div>
+      <LoadingSpinner />
     );
   }
   
