@@ -1,12 +1,10 @@
+import { NextResponse } from 'next/server';
 import { findUserByUsername } from '@/lib/db';
 import { comparePassword, generateToken } from '@/utils/auth';
-import { NextResponse } from 'next/server';
-import { LoginCredentials } from '@/types';
 
 export async function POST(req: Request) {
   try {
-    const body: LoginCredentials = await req.json();
-    const { username, password } = body;
+    const { username, password } = await req.json();
     
     const user = await findUserByUsername(username);
     if (!user) {
@@ -25,17 +23,27 @@ export async function POST(req: Request) {
     }
     
     const token = generateToken(user.id, user.username);
+    
+    // Create response with proper cookie settings for Vercel
     const response = NextResponse.json(
-      { message: 'Login successful', username: user.username },
+      { 
+        success: true,
+        message: 'Login successful', 
+        username: user.username 
+      },
       { status: 200 }
     );
     
-    response.cookies.set('token', token, {
+    // Set cookie with proper options for Vercel
+    response.cookies.set({
+      name: 'token',
+      value: token,
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60,
+      secure: true, // Must be true for HTTPS (Vercel uses HTTPS)
+      sameSite: 'lax', // Changed from 'strict' to 'lax' for better compatibility
+      maxAge: 7 * 24 * 60 * 60, // 7 days
       path: '/',
+      domain: process.env.VERCEL_URL ? `.${process.env.VERCEL_URL}` : undefined, // Handle Vercel domains
     });
     
     return response;
