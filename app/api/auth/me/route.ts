@@ -4,7 +4,7 @@ import { findUserById } from '@/lib/db';
 
 export async function GET(req: Request) {
   try {
-    // Get token from cookies - more robust parsing
+    // Get token from cookies
     const cookieHeader = req.headers.get('cookie');
     let token = null;
     
@@ -18,6 +18,9 @@ export async function GET(req: Request) {
         }
       }
     }
+    
+    console.log('Cookie header:', cookieHeader); // Debug log
+    console.log('Token found:', !!token); // Debug log
     
     if (!token) {
       return NextResponse.json(

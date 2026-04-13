@@ -24,7 +24,6 @@ export async function POST(req: Request) {
     
     const token = generateToken(user.id, user.username);
     
-    // Create response with proper cookie settings for Vercel
     const response = NextResponse.json(
       { 
         success: true,
@@ -34,16 +33,13 @@ export async function POST(req: Request) {
       { status: 200 }
     );
     
-    // Set cookie with proper options for Vercel
-    response.cookies.set({
-      name: 'token',
-      value: token,
+    // Cookie settings that work on Vercel
+    response.cookies.set('token', token, {
       httpOnly: true,
-      secure: true, // Must be true for HTTPS (Vercel uses HTTPS)
-      sameSite: 'lax', // Changed from 'strict' to 'lax' for better compatibility
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      secure: process.env.NODE_ENV === 'production', // Important: true on Vercel
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
-      domain: process.env.VERCEL_URL ? `.${process.env.VERCEL_URL}` : undefined, // Handle Vercel domains
     });
     
     return response;
