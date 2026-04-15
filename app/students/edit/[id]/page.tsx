@@ -109,7 +109,7 @@ export default function EditStudentPage() {
       </div>
       
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-primary mb-6">Edit Student</h1>
+        <h1 className="text-2xl font-bold text-primary mb-6">የተማሪ መረጃ ቀይር</h1>
         
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -209,22 +209,24 @@ export default function EditStudentPage() {
             </div>
             
             <div>
-              <label className="block text-gray-700 mb-2">መንፈሳዊ የት/ት ደረጃ፡</label>
+              <label className="block text-gray-700 mb-2">መንፈሳዊ የት/ት ደረጃ *</label>
               <input
                 type="text"
                 name="churchEducation"
                 value={formData.churchEducation}
+                required
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
               />
             </div>
             
             <div>
-              <label className="block text-gray-700 mb-2">አለማዊ የት/ት ደረጃ፡</label>
+              <label className="block text-gray-700 mb-2">አለማዊ የት/ት ደረጃ *</label>
               <input
                 type="text"
                 name="outsideEducation"
                 value={formData.outsideEducation}
+                required
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
               />

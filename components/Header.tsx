@@ -64,7 +64,7 @@ export default function Header() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             <div className="text-white text-xl font-bold">
-              Student Management System
+               የደቂቅ አባላት መረጃ መያዣ ስርዓት
             </div>
             <div className="w-24 h-8 bg-primary/50 rounded animate-pulse"></div>
           </div>
@@ -79,7 +79,7 @@ export default function Header() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-white text-xl font-bold">
-              Student Management System
+               የደቂቅ አባላት መረጃ መያዣ ስርዓት
             </Link>
             <div className="space-x-4">
               <Link href="/login" className="text-white hover:text-secondary transition">
@@ -99,7 +99,7 @@ export default function Header() {
     <header className="bg-primary shadow-lg fixed top-0 w-full z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <Link href="/dashboard" className="text-white text-xl font-bold">
+          <Link href="/dashboard" className="text-white sm:text-xl font-bold">
             የደቂቅ አባላት መረጃ መያዣ ስርዓት
           </Link>
           

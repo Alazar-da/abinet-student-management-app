@@ -94,14 +94,14 @@ export default function StudentDetailPage() {
             className="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90 transition inline-flex items-center"
           >
             <FaEdit className="mr-2" />
-            Edit
+            አስተካክል
           </Link>
           <button
             onClick={() => setShowDeleteModal(true)}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition inline-flex items-center"
           >
             <FaTrash className="mr-2" />
-            Delete
+            ሰርዝ
           </button>
         </div>
       </div>
@@ -188,22 +188,22 @@ export default function StudentDetailPage() {
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Confirm Delete</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">መሰረዝ አረጋግጥ</h2>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete <strong>{student.name}</strong>? This action cannot be undone.
+              እርግጠኛ ነዎት <strong>{student.name}</strong> መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊቀለበስ አይችልም፡፡
             </p>
             <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
               >
-                Cancel
+                ሰርዝ
               </button>
               <button
                 onClick={handleDelete}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
               >
-                Delete
+                አቋርጥ
               </button>
             </div>
           </div>

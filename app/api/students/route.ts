@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getAllStudents, createStudent } from '@/lib/db';
+import { supabaseAdmin } from '@/lib/supabase';
 import { verifyToken } from '@/utils/auth';
 
-// GET - Fetch all students (protected)
+// GET - Fetch students with pagination and search
 export async function GET(request: Request) {
   try {
     // Get token from cookies
@@ -26,8 +26,46 @@ export async function GET(request: Request) {
       );
     }
     
-    const students = await getAllStudents();
-    return NextResponse.json(students);
+    // Get query parameters
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') || '1');
+    const limit = parseInt(url.searchParams.get('limit') || '10');
+    const search = url.searchParams.get('search') || '';
+    const offset = (page - 1) * limit;
+    
+    // Build query
+    let query = supabaseAdmin
+      .from('students')
+      .select('*', { count: 'exact' });
+    
+    // Add search filter if provided
+    if (search) {
+      query = query.or(
+        `name.ilike.%${search}%,` +
+        `church_name.ilike.%${search}%,` +
+        `phone_number.ilike.%${search}%,` +
+        `address.ilike.%${search}%`
+      );
+    }
+    
+    // Add pagination
+    query = query
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limit - 1);
+    
+    const { data: students, error, count } = await query;
+    
+    if (error) throw error;
+    
+    return NextResponse.json({
+      students: students || [],
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil((count || 0) / limit),
+        totalItems: count || 0,
+        itemsPerPage: limit,
+      },
+    });
   } catch (error) {
     console.error('GET Students Error:', error);
     return NextResponse.json(
@@ -103,7 +141,13 @@ export async function POST(request: Request) {
       outside_education: body.outsideEducation || ''
     };
     
-    const student = await createStudent(studentData);
+    const { data: student, error } = await supabaseAdmin
+      .from('students')
+      .insert([studentData])
+      .select()
+      .single();
+    
+    if (error) throw error;
     
     return NextResponse.json(student, { status: 201 });
   } catch (error) {
