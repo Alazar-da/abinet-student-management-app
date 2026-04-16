@@ -82,14 +82,14 @@ export default function StudentDetailPage() {
   }
   
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="mb-6 flex justify-between items-center">
-        <Link href="/students" className="text-primary hover:text-secondary inline-flex items-center">
+    <div className="container mx-auto px-4 py-8 sm:max-w-4xl w-full">
+      <div className="mb-6 flex sm:flex-row flex-col justify-start sm:justify-between items-center w-full gap-3">
+        <Link href="/students" className="text-primary hover:text-secondary inline-flex items-center w-full">
           <FaArrowLeft className="mr-2" />
           ወደ ተማሪዎች ዝርዝር ተመለስ
         </Link>
         
-        <div className="space-x-2">
+        <div className="flex justify-between sm:justify-end sm:space-x-2 w-full">
           <Link
             href={`/students/edit/${student.id}`}
             className="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90 transition inline-flex items-center"
