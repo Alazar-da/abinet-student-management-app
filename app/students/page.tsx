@@ -20,6 +20,7 @@ import {
 } from 'react-icons/fa';
 import * as XLSX from 'xlsx';
 import { Student } from '@/types';
+import { FiX } from 'react-icons/fi';
 
 interface PaginationData {
   currentPage: number;
@@ -178,7 +179,7 @@ export default function StudentsPage() {
           <p className="text-gray-600 mt-2">ሁሉንም የተማሪ መዝገቦች ይመልከቱ እና ያስተዳድሩ</p>
         </div>
         
-        <div className="flex gap-3">
+        <div className="flex justify-between sm:gap-3 w-full md:w-fit">
           <button
             onClick={exportToExcel}
             disabled={exporting}
@@ -200,7 +201,7 @@ export default function StudentsPage() {
       
       {/* Search Bar */}
       <div className="mb-6">
-        <div className="relative max-w-md">
+        <div className="relative w-full md:max-w-md">
           <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
             type="text"
@@ -326,24 +327,27 @@ export default function StudentsPage() {
       
       {/* Delete Confirmation Modal */}
       {showDeleteModal && selectedStudent && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <div className="fixed inset-0 h-screen w-full flex items-center justify-center z-50">
+          <div  onClick={() => setShowDeleteModal(false)} className='bg-black/60 fixed top-0 left-0 h-screen w-full z-5'></div>
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative z-10">
+            <button  onClick={() => setShowDeleteModal(false)} className='top-2 right-2 absolute z-15 text-red-600 font-semibold hover:text-red-700'><FiX /></button>
+
             <h2 className="text-xl font-bold text-gray-800 mb-4">መሰረዝ አረጋግጥ</h2>
             <p className="text-gray-600 mb-6">
               እርግጠኛ ነዎት <strong>{selectedStudent.name}</strong> መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊቀለበስ አይችልም፡፡
             </p>
             <div className="flex justify-end space-x-3">
-              <button
+              {/* <button
                 onClick={() => setShowDeleteModal(false)}
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
               >
-                ሰርዝ
-              </button>
+                አቋርጥ
+              </button> */}
               <button
                 onClick={handleDelete}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
               >
-                አቋርጥ
+                ሰርዝ
               </button>
             </div>
           </div>

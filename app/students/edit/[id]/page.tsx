@@ -94,7 +94,7 @@ export default function EditStudentPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-primary text-xl">Loading student data...</div>
+        <div className="text-primary text-xl">የተማሪ መረጃ በማምታት ላይ...</div>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function EditStudentPage() {
       <div className="mb-6">
         <Link href="/students" className="text-primary hover:text-secondary inline-flex items-center">
           <FaArrowLeft className="mr-2" />
-          Back to Students
+          ወደ ተማሪዎች ዝርዝር ተመለስ
         </Link>
       </div>
       
@@ -239,7 +239,7 @@ export default function EditStudentPage() {
               className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition flex items-center"
             >
               <FaTimes className="mr-2" />
-              Cancel
+              አቋርት
             </Link>
             <button
               type="submit"
@@ -247,7 +247,7 @@ export default function EditStudentPage() {
               className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition flex items-center"
             >
               <FaSave className="mr-2" />
-              {saving ? 'Saving...' : 'Save Changes'}
+              {saving ? 'በመዝገብ ላይ...' : 'መዝግብ'}
             </button>
           </div>
         </form>

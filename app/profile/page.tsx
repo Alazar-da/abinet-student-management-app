@@ -94,7 +94,7 @@ export default function ProfilePage() {
       <div className="mb-6">
         <Link href="/dashboard" className="text-primary hover:text-secondary inline-flex items-center">
           <FaArrowLeft className="mr-2" />
-          Back to Dashboard
+          ወደ ዳሽቦርድ ተመለስ
         </Link>
       </div>
       

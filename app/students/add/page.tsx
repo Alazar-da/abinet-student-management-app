@@ -62,7 +62,7 @@ export default function AddStudentPage() {
       <div className="mb-6">
         <Link href="/students" className="text-primary hover:text-secondary inline-flex items-center">
           <FaArrowLeft className="mr-2" />
-          Back to Students
+          ወደ ተማሪዎች ዝርዝር ተመለስ
         </Link>
       </div>
       
@@ -198,7 +198,7 @@ export default function AddStudentPage() {
               className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition flex items-center"
             >
               <FaTimes className="mr-2" />
-              Cancel
+              አቋርት
             </Link>
             <button
               type="submit"
@@ -206,7 +206,7 @@ export default function AddStudentPage() {
               className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition flex items-center"
             >
               <FaSave className="mr-2" />
-              {loading ? 'Saving...' : 'Save Student'}
+              {loading ? 'በመዝገብ ላይ...' : 'መዝግብ'}
             </button>
           </div>
         </form>

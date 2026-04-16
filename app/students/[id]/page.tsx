@@ -15,6 +15,7 @@ import {
   FaChalkboardTeacher
 } from 'react-icons/fa';
 import { Student } from '@/types';
+import { FiX } from 'react-icons/fi';
 
 export default function StudentDetailPage() {
   const [student, setStudent] = useState<Student | null>(null);
@@ -62,7 +63,7 @@ export default function StudentDetailPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-primary text-xl">Loading student details...</div>
+        <div className="text-primary text-xl">የተማሪ መረጃ በማምታት ላይ...</div>
       </div>
     );
   }
@@ -73,7 +74,7 @@ export default function StudentDetailPage() {
         <div className="bg-white rounded-lg shadow-md p-8 text-center">
           <p className="text-gray-600">Student not found</p>
           <Link href="/students" className="text-primary hover:text-secondary mt-2 inline-block">
-            Back to Students
+           ወደ ተማሪዎች ዝርዝር ተመለስ
           </Link>
         </div>
       </div>
@@ -85,7 +86,7 @@ export default function StudentDetailPage() {
       <div className="mb-6 flex justify-between items-center">
         <Link href="/students" className="text-primary hover:text-secondary inline-flex items-center">
           <FaArrowLeft className="mr-2" />
-          Back to Students
+          ወደ ተማሪዎች ዝርዝር ተመለስ
         </Link>
         
         <div className="space-x-2">
@@ -118,7 +119,7 @@ export default function StudentDetailPage() {
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h2 className="text-xl font-semibold text-primary mb-4">Personal Information</h2>
+              <h2 className="text-xl font-semibold text-primary mb-4">የተማሪ መረጃ</h2>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <FaUser className="text-gray-400 w-5 mr-3" />
@@ -157,12 +158,12 @@ export default function StudentDetailPage() {
             </div>
             
             <div>
-              <h2 className="text-xl font-semibold text-primary mb-4">Education</h2>
+              <h2 className="text-xl font-semibold text-primary mb-4">የት/ት ደረጃ</h2>
               <div className="space-y-3">
                 <div className="flex items-start">
                   <FaGraduationCap className="text-gray-400 w-5 mr-3 mt-1" />
                   <div>
-                    <p className="text-sm text-gray-500">መንፈሳዊ የት/ት ደረጃ፡</p>
+                    <p className="text-sm text-gray-500">መንፈሳዊ፡</p>
                     <p className="font-medium">{student.church_education || 'Not specified'}</p>
                   </div>
                 </div>
@@ -170,7 +171,7 @@ export default function StudentDetailPage() {
                 <div className="flex items-start">
                   <FaGraduationCap className="text-gray-400 w-5 mr-3 mt-1" />
                   <div>
-                    <p className="text-sm text-gray-500">አለማዊ የት/ት ደረጃ፡</p>
+                    <p className="text-sm text-gray-500">አለማዊ፡</p>
                     <p className="font-medium">{student.outside_education || 'Not specified'}</p>
                   </div>
                 </div>
@@ -179,35 +180,38 @@ export default function StudentDetailPage() {
           </div>
           
           <div className="mt-6 pt-6 border-t text-center text-sm text-gray-500">
-            <p>Member since: {new Date(student.created_at).toLocaleDateString()}</p>
+            <p>የተመዘገበበት ቀን: {new Date(student.created_at).toLocaleDateString()}</p>
           </div>
         </div>
       </div>
       
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">መሰረዝ አረጋግጥ</h2>
-            <p className="text-gray-600 mb-6">
-              እርግጠኛ ነዎት <strong>{student.name}</strong> መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊቀለበስ አይችልም፡፡
-            </p>
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowDeleteModal(false)}
-                className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
-              >
-                ሰርዝ
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-              >
-                አቋርጥ
-              </button>
-            </div>
-          </div>
-        </div>
+          <div className="fixed inset-0 h-screen w-full flex items-center justify-center z-50">
+                  <div  onClick={() => setShowDeleteModal(false)} className='bg-black/60 fixed top-0 left-0 h-screen w-full z-5'></div>
+                  <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative z-10">
+                    <button  onClick={() => setShowDeleteModal(false)} className='top-2 right-2 absolute z-15 text-red-600 font-semibold hover:text-red-700'><FiX /></button>
+        
+                    <h2 className="text-xl font-bold text-gray-800 mb-4">መሰረዝ አረጋግጥ</h2>
+                    <p className="text-gray-600 mb-6">
+                      እርግጠኛ ነዎት <strong>{student.name}</strong> መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊቀለበስ አይችልም፡፡
+                    </p>
+                    <div className="flex justify-end space-x-3">
+                      {/* <button
+                        onClick={() => setShowDeleteModal(false)}
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+                      >
+                        አቋርጥ
+                      </button> */}
+                      <button
+                        onClick={handleDelete}
+                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                      >
+                        ሰርዝ
+                      </button>
+                    </div>
+                  </div>
+                </div>
       )}
     </div>
   );
